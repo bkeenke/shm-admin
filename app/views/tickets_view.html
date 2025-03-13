@@ -1,0 +1,54 @@
+
+<form name="ticketForm" class="form-horizontal row-border">
+    <div class="modal-header">
+        <h4 class="modal-title">{{ title }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Тикет ID:</label>
+            <div class="col-sm-2">
+                <input type="text" ng-model="data.id" class="form-control" readonly>
+            </div>
+            <label class="col-sm-2 control-label">Создан:</label>
+            <div class="col-sm-4">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Статус:</label>
+            <div class="col-sm-2">
+                <input type="text" value="{{ data.status }}" readonly="readonly" class="form-control">
+            </div>
+            <label class="col-sm-2 control-label">От пользователя:</label>
+            <div class="col-sm-4">
+                <users-list id="data.user_id" readonly="readonly"></users-list>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Сообщении</label>
+            <div class="col-sm-8">
+                <div class="chat-box">
+                    <div ng-repeat="msg in data.messages track by $index" 
+                         class="chat-message" 
+                         ng-class="{'chat-left btn-primary': !msg.answer, 'chat-right btn-success': msg.answer}">
+                        <div class="chat-meta">
+                            <span class="chat-time">{{ msg.created }}</span>
+                        </div>
+                        <div class="chat-text">{{ msg.message }}</div>
+                    </div>
+                </div>
+                <textarea name="message" ng-model="newMessage" class="form-control" placeholder="Введите сообщение..."></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-8">
+                <button class="btn btn-primary " ng-if="data.status!='CLOSE'" ng-click="closeTicket()">Close ticket</button>
+                <button class="btn btn-primary pull-right" ng-disabled="!newMessage || newMessage.trim() === ''" ng-click="sendMessage()">Send message</button>
+            </div>
+        </div>
+    </div> <!-- modal-body -->
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="close()">Close</button>
+    </div>
+</form>
