@@ -48,6 +48,11 @@ angular
       ]
     },
     {
+      label: 'Тикеты',
+      iconClasses: 'ti ti-comments',
+      url: '#!/tickets'
+    },
+    {
       label: 'Услуги',
       iconClasses: 'ti ti-menu-alt',
       children: [
